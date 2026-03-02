@@ -139,6 +139,8 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("member");
 
+            entity.HasIndex(e => e.Email, "member_email_unique").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
@@ -149,6 +151,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.LastName)
                 .HasMaxLength(100)
                 .HasColumnName("last_name");
+            entity.Property(e => e.PhoneNumber)
+                .HasMaxLength(30)
+                .HasColumnName("phone_number");
         });
 
         OnModelCreatingPartial(modelBuilder);
