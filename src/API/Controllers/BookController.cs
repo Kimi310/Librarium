@@ -1,4 +1,5 @@
-﻿using Data.Interfaces;
+﻿using API.dtos;
+using Data.Interfaces;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +11,15 @@ public class BookController(IBookRepository repository) : ControllerBase
 {
     [HttpGet]
     [Route("books")]
-    public async Task<List<Book>> GetBooks()
+    public async Task<List<BookResponseDto>> GetBooks()
     {
-        return await repository.GetAllBooks();
+        var booksWithAuthors = await repository.GetAllBooks();
+        var response = new List<BookResponseDto>();
+        foreach (var ba in booksWithAuthors)
+        {
+            var book = new BookResponseDto().DtoFromBook(ba);
+            response.Add(book);
+        }
+        return response;
     }
 }

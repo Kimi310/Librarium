@@ -14,4 +14,6 @@ public partial class Book
     public int PublicationYear { get; set; }
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
+
+    public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 }

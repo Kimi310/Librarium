@@ -9,6 +9,8 @@ public class BookRepository(AppDbContext context) : IBookRepository
 {
     public async Task<List<Book>> GetAllBooks()
     {
-        return await context.Books.ToListAsync();
+        return await context.Books
+            .Include(b => b.Authors)
+            .ToListAsync();
     }
 }
