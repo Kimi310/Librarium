@@ -121,6 +121,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.LoanDate).HasColumnName("loan_date");
             entity.Property(e => e.MemberId).HasColumnName("member_id");
             entity.Property(e => e.ReturnDate).HasColumnName("return_date");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasColumnName("status");
 
             entity.HasOne(d => d.Book).WithMany(p => p.Loans)
                 .HasForeignKey(d => d.BookId)

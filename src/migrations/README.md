@@ -29,4 +29,26 @@ Migration file: V003__enforce_unique_email_and_add_phone_nullable.sql
 Description: Email uniqueness enforced. Existing duplicates were resolved by appending member ID to ensure determinism.
 Phone number introduced but remains optional.
 Must be applied before new API is deployed. Old API continues functioning since phone_number is nullable.
-I chose to automatically resolve duplicate emails rather than aborting migration. This avoids manual intervention but modifies existing data deterministically. Phone number was added as nullable to avoid breaking running application during deployment window.
+I chose to automatically resolve duplicate
+emails rather than aborting migration. This avoids 
+manual intervention but modifies existing data 
+deterministically. Phone number was added as 
+nullable to avoid breaking running application 
+during deployment window.
+
+Step 2
+
+Migration file: V004__make_phone_number_not_null.sql
+
+Description: phone_number becomes mandatory.
+Must be applied only after all members have phone numbers 
+populated.
+
+Decision & tradeoffs:
+We separated this into a second migration to avoid 
+breaking the live application during rollout. This follows 
+a safe expand-and-contract migration pattern.
+
+****
+
+**Third requirement**
