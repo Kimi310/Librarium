@@ -18,7 +18,8 @@ public class LoanController(ILoanRepository loanRepository) : ControllerBase
             BookId = loanDto.BookId,
             MemberId = loanDto.MemberId,
             LoanDate = loanDto.LoanDate,
-            ReturnDate = loanDto.ReturnDate
+            ReturnDate = loanDto.ReturnDate,
+            Status =  loanDto.Status
         };
         return await loanRepository.NewLoan(loan);
     }

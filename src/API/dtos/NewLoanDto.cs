@@ -9,5 +9,6 @@ public class NewLoanDto
     public DateOnly LoanDate { get; set; }
 
     public DateOnly? ReturnDate { get; set; }
-
+    
+    public string Status { get; set; }
 }

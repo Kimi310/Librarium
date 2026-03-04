@@ -78,3 +78,22 @@ logic. Filling exisiting data ensures that the data remains consistent
 with the new status model. This allows the backend to gradually
 transition to status based 
 state management without disrupting the frontend integration.
+
+Step 2
+Migration file:
+V006__make_loan_status_not_null.sql
+
+Description:
+The status column becomes mandatory (NOT NULL) after 
+the application has been updated to always set a status 
+when creating or updating loans. The dto for new loan got changed 
+to support status regognistion.
+
+Decision & tradeoffs:
+This migration was separated to avoid breaking the 
+existing application before it is updated to write the
+new field. By delaying enforcement of the NOT NULL 
+constraint, we ensure backward compatibility during the 
+transition period. This again follows the expand-and-contract 
+pattern and enables safe evolution of the domain model without 
+impacting active consumers of the API.
