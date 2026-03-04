@@ -43,12 +43,15 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<Book>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("book_pkey");
-
+            entity.HasQueryFilter(b => !b.IsRetired);
             entity.ToTable("book");
 
             entity.HasIndex(e => e.Isbn, "book_isbn_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IsRetired)
+                .HasDefaultValue(false)
+                .HasColumnName("is_retired");
             entity.Property(e => e.Isbn)
                 .HasMaxLength(20)
                 .HasColumnName("isbn");

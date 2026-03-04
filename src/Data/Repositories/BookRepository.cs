@@ -13,4 +13,12 @@ public class BookRepository(AppDbContext context) : IBookRepository
             .Include(b => b.Authors)
             .ToListAsync();
     }
+
+    public async Task<Book> GetBookById(long id)
+    {
+        var book = await context.Books.IgnoreQueryFilters()
+            .FirstOrDefaultAsync(b => b.Id == id);
+        
+        return book;
+    }
 }

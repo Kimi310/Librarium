@@ -97,3 +97,22 @@ constraint, we ensure backward compatibility during the
 transition period. This again follows the expand-and-contract 
 pattern and enables safe evolution of the domain model without 
 impacting active consumers of the API.
+
+
+Migration file:
+V007__add_book_retired_flag.sql
+
+Description:
+A new is_retired column was added to the book table with 
+default false. This allows books to be retired from 
+circulation without being physically deleted. Loan history 
+and foreign key relationships remain intact.
+
+Decision & tradeoffs:
+The original proposal suggested using an IsDeleted 
+flag with manual query filtering. We accepted the soft-state 
+concept but renamed the column to is_retired. Instead of 
+relying on manual filtering, a global query filter was
+introduced in AppDbContext to ensure consistent behavior 
+across all queries. Additional validation was added to 
+prevent new loans for retired books. 
