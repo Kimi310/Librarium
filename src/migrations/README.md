@@ -52,3 +52,29 @@ a safe expand-and-contract migration pattern.
 ****
 
 **Third requirement**
+
+Step 1
+Migration file:
+V005__add_loan_status_nullable_and_backfill.sql
+
+Description:
+A new status column was added to the loan table to support 
+the extended loan lifecycle: Active, Returned, Overdue, and Lost.
+Existing rows were backfilled based on current data:
+
+Loans with return_date IS NOT NULL → Returned
+
+Loans with return_date IS NULL → Active
+
+The column was introduced as nullable to avoid
+breaking the currently deployed API, which does not yet set
+status.
+
+Decision & tradeoffs:
+The column was added as nullable to avoid runtime failures 
+during the deployment window. The existing "frontend" determines 
+loan state based on returnDate, so I preserved this 
+logic. Filling exisiting data ensures that the data remains consistent 
+with the new status model. This allows the backend to gradually
+transition to status based 
+state management without disrupting the frontend integration.

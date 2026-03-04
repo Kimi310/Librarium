@@ -15,6 +15,8 @@ public partial class Loan
 
     public DateOnly? ReturnDate { get; set; }
 
+    public string? Status { get; set; }
+
     public virtual Book Book { get; set; } = null!;
 
     public virtual Member Member { get; set; } = null!;
