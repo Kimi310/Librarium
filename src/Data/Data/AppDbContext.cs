@@ -43,7 +43,7 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<Book>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("book_pkey");
-            entity.HasQueryFilter(b => !b.IsRetired);
+
             entity.ToTable("book");
 
             entity.HasIndex(e => e.Isbn, "book_isbn_key").IsUnique();
@@ -55,6 +55,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.Isbn)
                 .HasMaxLength(20)
                 .HasColumnName("isbn");
+            entity.Property(e => e.IsbnText)
+                .HasMaxLength(20)
+                .HasColumnName("isbn_text");
             entity.Property(e => e.PublicationYear).HasColumnName("publication_year");
             entity.Property(e => e.Title)
                 .HasMaxLength(300)

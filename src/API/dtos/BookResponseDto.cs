@@ -8,6 +8,8 @@ public class BookResponseDto
     public string Title { get; set; } = null!;
     public string Isbn { get; set; } = null!;
     public int PublicationYear { get; set; }
+    
+    public string? StringIsbn { get; set; }
 
     public List<AuthorDto> Authors { get; set; } = new();
 
@@ -26,7 +28,8 @@ public class BookResponseDto
             Title = book.Title,
             Isbn = book.Isbn,
             PublicationYear = book.PublicationYear,
-            Authors = authorDtos
+            Authors = authorDtos,
+            StringIsbn = book.IsbnText
         };
     }
 }

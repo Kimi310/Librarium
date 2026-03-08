@@ -15,6 +15,8 @@ public partial class Book
 
     public bool IsRetired { get; set; }
 
+    public string? IsbnText { get; set; }
+
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
     public virtual ICollection<Author> Authors { get; set; } = new List<Author>();

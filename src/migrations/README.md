@@ -98,6 +98,9 @@ transition period. This again follows the expand-and-contract
 pattern and enables safe evolution of the domain model without 
 impacting active consumers of the API.
 
+****
+
+**Fourth requeirement**
 
 Migration file:
 V007__add_book_retired_flag.sql
@@ -116,3 +119,18 @@ relying on manual filtering, a global query filter was
 introduced in AppDbContext to ensure consistent behavior 
 across all queries. Additional validation was added to 
 prevent new loans for retired books. 
+
+****
+
+**Fifth requirement**
+
+Step 1 
+
+Migration file:
+V008__introduce_new_isbn_column.sql
+
+Description:
+A new column isbn_text is introduced with a string type. 
+The old integer column remains temporarily so existing API consumers and application code can continue 
+functioning during the transition. There is also an application change to be made, 
+the api will return both values temporarly until the full trasnition ends.
