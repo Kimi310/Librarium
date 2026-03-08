@@ -134,3 +134,13 @@ A new column isbn_text is introduced with a string type.
 The old integer column remains temporarily so existing API consumers and application code can continue 
 functioning during the transition. There is also an application change to be made, 
 the api will return both values temporarly until the full trasnition ends.
+
+Step 2
+
+Migration file:
+V009__remove_old_isbn_column.sql
+
+Description:
+Once all application code has been updated and the new column has been 
+populated with valid ISBN values, the old integer column is removed and the 
+new column is renamed to isbn.

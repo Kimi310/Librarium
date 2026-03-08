@@ -9,13 +9,11 @@ public partial class Book
 
     public string Title { get; set; } = null!;
 
-    public string Isbn { get; set; } = null!;
-
     public int PublicationYear { get; set; }
 
     public bool IsRetired { get; set; }
 
-    public string? IsbnText { get; set; }
+    public string? Isbn { get; set; }
 
     public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
 
