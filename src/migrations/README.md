@@ -2,11 +2,19 @@
 
 Migration file: V001__initial_schema.sql
 
+
+Type of change
+Initial schema.
+
+
 Description: Contains initial schema for the database described in the introduction part of the assignment.
 
 ****
 
 **First requirement**
+
+Type of change
+Additive (non-breaking).
 
 Migration file: V002__add_authors_transitional.sql
 
@@ -26,6 +34,9 @@ Step 1
 
 Migration file: V003__enforce_unique_email_and_add_phone_nullable.sql
 
+Type of change
+Additive (potentially breaking).
+
 Description: Email uniqueness enforced. Existing duplicates were resolved by appending member ID to ensure determinism.
 Phone number introduced but remains optional.
 Must be applied before new API is deployed. Old API continues functioning since phone_number is nullable.
@@ -39,6 +50,9 @@ during deployment window.
 Step 2
 
 Migration file: V004__make_phone_number_not_null.sql
+
+Type of change
+Requires coordination.
 
 Description: phone_number becomes mandatory.
 Must be applied only after all members have phone numbers 
@@ -56,6 +70,9 @@ a safe expand-and-contract migration pattern.
 Step 1
 Migration file:
 V005__add_loan_status_nullable_and_backfill.sql
+
+Type of change
+Additive (non-breaking).
 
 Description:
 A new status column was added to the loan table to support 
@@ -83,6 +100,9 @@ Step 2
 Migration file:
 V006__make_loan_status_not_null.sql
 
+Type of change
+Requires coordination.
+
 Description:
 The status column becomes mandatory (NOT NULL) after 
 the application has been updated to always set a status 
@@ -104,6 +124,9 @@ impacting active consumers of the API.
 
 Migration file:
 V007__add_book_retired_flag.sql
+
+Type of change
+Additive (non-breaking).
 
 Description:
 A new is_retired column was added to the book table with 
@@ -129,6 +152,9 @@ Step 1
 Migration file:
 V008__introduce_new_isbn_column.sql
 
+Type of change
+Additive (potentially breaking).
+
 Description:
 A new column isbn_text is introduced with a string type. 
 The old integer column remains temporarily so existing API consumers and application code can continue 
@@ -139,6 +165,9 @@ Step 2
 
 Migration file:
 V009__remove_old_isbn_column.sql
+
+Type of change
+Destructive.
 
 Description:
 Once all application code has been updated and the new column has been 
